@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # One-command bootstrap for a fresh Pi:
-#   curl -fsSL https://raw.githubusercontent.com/arnegiacomo/fugleramme/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/Sandy-Sa/fugleramme/main/install.sh | bash
 # Clones the repo, installs missing dependencies, optionally enables USB gadget
 # mode, then hands off to run.sh. The split is the reboot: what only takes effect
 # on boot lives here, what is safe to re-run against a live frame lives in run.sh.
@@ -8,9 +8,10 @@
 set -euo pipefail
 export PATH="$HOME/.local/bin:$PATH"
 
-REPO_URL="https://github.com/arnegiacomo/fugleramme.git"
+# This fork, not upstream (arnegiacomo/fugleramme). FUGLERAMME_REPO overrides.
+REPO_URL="${FUGLERAMME_REPO:-https://github.com/Sandy-Sa/fugleramme.git}"
 REPO_DIR="${FUGLERAMME_DIR:-$HOME/fugleramme}"
-# Empty means the latest release: main can carry work that has not shipped.
+# Empty means the latest release, or main when the fork has no release tags.
 REPO_REF="${FUGLERAMME_REF:-}"
 ASSUME_YES=0
 DROP_BUNDLED=0
@@ -259,7 +260,8 @@ latest_release() {
 
 ensure_repo() {
   [[ -n $REPO_REF ]] || REPO_REF=$(latest_release)
-  [[ -n $REPO_REF ]] || need "a release to install"
+  # A fork carries no tags until it cuts a release of its own.
+  [[ -n $REPO_REF ]] || REPO_REF=main
   echo "   installing $REPO_REF"
   if [[ -d "$REPO_DIR/.git" ]]; then
     git -C "$REPO_DIR" fetch --depth 1 origin "$REPO_REF"

@@ -98,7 +98,7 @@ Species names in 40+ languages, see [Languages](docs/languages.md).
 On the Pi:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arnegiacomo/fugleramme/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Sandy-Sa/fugleramme/main/install.sh | bash
 ```
 
 It asks where BirdNET-Go should run and which ports to use, then installs everything and starts the frame as a

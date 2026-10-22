@@ -48,9 +48,10 @@ DEFAULT_DETECTOR_URL = f"http://127.0.0.1:{BIRDNET_PORT}"
 # Published docs site (mkdocs.yml site_url).
 DOCS_URL = "https://arnegiacomo.dev/fugleramme/"
 
-# Self-update source. HTTPS, not the ssh origin: a service fetch has no agent.
-REPO_HTTPS_URL = "https://github.com/arnegiacomo/fugleramme.git"
-RELEASES_API = "https://api.github.com/repos/arnegiacomo/fugleramme/releases/latest"
+# Self-update source: this fork, so the admin's update button never moves the
+# frame onto upstream. HTTPS, not the ssh origin: a service fetch has no agent.
+REPO_HTTPS_URL = "https://github.com/Sandy-Sa/fugleramme.git"
+RELEASES_API = "https://api.github.com/repos/Sandy-Sa/fugleramme/releases/latest"
 
 # Where the admin sends a list of birds without art.
 NEW_ISSUE_URL = "https://github.com/arnegiacomo/fugleramme/issues/new"
